@@ -4,7 +4,7 @@ namespace PracticeCore\Player;
 
 use pocketmine\player\Player;
 
-final class PPlayer {
+class PPlayer {
 
 	private Player $player;
 
@@ -20,9 +20,15 @@ final class PPlayer {
 		return $this->player;
 	}
 
-	public function invite(PPlayer $inviter){
+	public function invite(PPlayer $PPlayer){
 
+		$player = $PPlayer->getPlayer();
 
+		$this->invites[$player->getName()] = new PlayerInvite($this, $PPlayer);
+
+		$player->sendMessage("You has invited");
+
+		$this->invites[$player->getName()]->getInvited()->getPlayer()->sendMessage("You are Invited");
 
 	}
 
